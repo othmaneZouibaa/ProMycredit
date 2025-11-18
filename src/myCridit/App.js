@@ -1,4 +1,4 @@
-import Acceule from "./Acceule"
+import Acceule from "./Accueil"
 
 const App=()=>{
     return(

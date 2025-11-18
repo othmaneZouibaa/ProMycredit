@@ -12,7 +12,7 @@ header{
     z-index:100;
 }
 .logo{
-    width: 100px;
+    width: 80px;
     margin-left:-10% ;
 }
 .kk{
@@ -27,6 +27,7 @@ header{
     list-style: none;margin-left: 200px;
 }
 .kk ul a{
+    font-family: Arial, Helvetica, sans-serif;
     margin-left:10px ;
     text-transform: capitalize;
     font-size: 13px;
@@ -74,7 +75,7 @@ button:hover{
 }
 .lk{
     margin-top: 80px;
-    background-image: url('ll.jpg');
+    background-image: url('photo.png');
     background-position: center;
     background-size: cover;
     width: 100%;
