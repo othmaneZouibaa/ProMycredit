@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Acc.css';
-const Acceule=()=>{
+const Accueil=()=>{
     return(
         <div>
                
@@ -8,8 +8,8 @@ const Acceule=()=>{
         <div className="header-left">
           <img src="./images/logo.png" className="logo" />
           <ul className="nav-list">
-            <li><Link to="/about"><strong>About</strong></Link></li>
             <li><Link to="/"><strong>Home</strong></Link></li>
+            <li><Link to="/about"><strong>About</strong></Link></li>
             <li><Link to="/Services"><strong>Services</strong></Link></li>
             <li><Link to="/contact"><strong>Contact</strong></Link></li>
           </ul>

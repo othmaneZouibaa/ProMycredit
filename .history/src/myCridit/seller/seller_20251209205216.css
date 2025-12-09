@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+   background: #f5f7fa;
+  color: #333;
+}
+
+.sidebar1 {
+  width: 250px;
+  background: linear-gradient(180deg, #507aa4, #4b749e);
+  color: white;
+  padding: 25px 20px;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+/* ✅ إزالة ستايل الرابط */
+.sidebar1 a {
+  text-decoration: none;
+}
+
+.sidebar1 button {
+  width: 100%;
+  padding: 14px 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  transition: 0.3s ease;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 15px;
+  text-align: left;
+}
+
+.sidebar1 button:hover,
+.sidebar1 .active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+
+
+
+@media (max-width: 700px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar1 {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .sidebar1 ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .sidebar1 ul li {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}

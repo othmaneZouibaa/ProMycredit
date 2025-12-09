@@ -7,7 +7,7 @@ const App=()=>{
         <div>
           
             <Routes>
-               <Route path="/seller-panel" element={<Seller />}/> 
+               <Route path="/seller-panel" element={<AjouterConsommer />}/> 
                <Route path="/" element={<Accueil/>}/> 
             </Routes>
              

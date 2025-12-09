@@ -1,11 +1,11 @@
-import { Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Accueil from "./home/Accueil"
 import Seller from "./seller/Seller"
 
 const App=()=>{
     return(
         <div>
-          
+          <BrowserRouter
             <Routes>
                <Route path="/seller-panel" element={<Seller />}/> 
                <Route path="/" element={<Accueil/>}/> 

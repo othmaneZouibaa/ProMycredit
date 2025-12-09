@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Accueil from "./home/Accueil"
 import Seller from "./seller/Seller"
-
+import
 const App=()=>{
     return(
         <div>

@@ -5,7 +5,7 @@ import Seller from "./seller/Seller"
 const App=()=>{
     return(
         <div>
-          
+          <
             <Routes>
                <Route path="/seller-panel" element={<Seller />}/> 
                <Route path="/" element={<Accueil/>}/> 

@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  background: #f4f7fb;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: #264557;
+  color: white;
+  padding: 30px 20px;
+}
+
+.brand {
+  margin-bottom: 30px;
+}
+
+.menu li {
+  list-style: none;
+  padding: 12px 0;
+  cursor: pointer;
+}
+
+.menu .active {
+  color: #1e90ff;
+}
+
+.main {
+  flex: 1;
+  padding: 30px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.topbar input {
+  width: 60%;
+  padding: 10px;
+}
+
+.logout {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+.panel {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+form {
+  margin-bottom: 30px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+form input {
+  padding: 10px;
+}
+
+form button {
+  margin-top: 10px;
+  padding: 10px 25px;
+  background: #1e90ff;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.edit {
+  background: blue;
+  color: white;
+  padding: 6px 10px;
+}
+
+.delete {
+  background: red;
+  color: white;
+  padding: 6px 10px;
+}
+
+
+@media (max-width: 600px) {
+
+  .sidebar {
+    display: none;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar input {
+    display: none;
+  }
+
+  table {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+   background: #f5f7fa;
+  color: #333;
+}
+
+
+
+
+
+@media (max-width: 700px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar1 {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .sidebar1 ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .sidebar1 ul li {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}
