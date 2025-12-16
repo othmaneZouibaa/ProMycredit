@@ -1,0 +1,21 @@
+import { Route, Routes } from "react-router-dom"
+import Accueil from "./home/Accueil"
+import Seller from "./seller/Seller"
+import Dashboard from "./seller/Customers"
+
+const App=()=>{
+    return(
+        <div>
+          
+            <Routes>
+               <Route path="/seller-panel" element={<Seller >
+                 <Route index element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+               </Seller>}/> 
+               <Route path="/" element={<Accueil/>}/> 
+            </Routes>
+             
+        </div>
+    )
+}
+export default App
