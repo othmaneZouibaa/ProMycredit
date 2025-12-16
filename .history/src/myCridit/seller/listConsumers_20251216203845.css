@@ -3,6 +3,7 @@
   padding: 20px;
 }
 
+/* Top bar */
 .top-bar {
  
   
@@ -26,6 +27,7 @@
   cursor: pointer;
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
