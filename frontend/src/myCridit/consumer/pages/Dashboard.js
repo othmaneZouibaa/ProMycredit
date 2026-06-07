@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 const Dashboard = () => {
   const { t } = useTranslation();
-  const { stats, recentCredits, status, error } = useSelector((state) => state.consumer);
+  const { stats, recentCredits, status } = useSelector((state) => state.consumer);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 

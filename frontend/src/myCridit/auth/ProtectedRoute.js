@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 const ProtectedRoute = ({ allowedRole }) => {
   const { t } = useTranslation();
-  const { isAuthenticated, user, status } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   // If we have a token but user info is still loading from API
   if (isAuthenticated && !user) {

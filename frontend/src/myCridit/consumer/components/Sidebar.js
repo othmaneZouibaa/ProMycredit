@@ -97,10 +97,10 @@ const Sidebar = () => {
           </div>
         </div>
         
-        <a href="#" className="nav-link" onClick={handleLogout} style={{ marginTop: '12px', color: 'var(--danger)' }}>
+        <button className="nav-link" onClick={handleLogout} style={{ marginTop: '12px', color: 'var(--danger)', background: 'none', border: 'none', width: '100%', textAlign: 'inherit', cursor: 'pointer' }}>
           <span className="nav-icon">🚪</span>
           <span>{t('common.sign_out')}</span>
-        </a>
+        </button>
       </div>
     </aside>
   );

@@ -13,7 +13,6 @@ const Dashboard = () => {
 
   const [editingCredit, setEditingCredit] = useState(null);
   const [editForm, setEditForm] = useState({ product_name: '', total_amount: '' });
-  const [selectedCredit, setSelectedCredit] = useState(null);
 
   useEffect(() => {
     dispatch(fetchDashboardStats());

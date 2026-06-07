@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './listConsumers.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchConsumers, addPayment, updateConsumer, deleteConsumer } from './listSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const ListConsumers = () => {
