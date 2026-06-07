@@ -98,86 +98,59 @@ const Dashboard = () => {
           <span className="stat-trend success" style={{ fontSize: '0.75rem', color: 'var(--success)', fontWeight: '600' }}>↑ {t('common.on_track')}</span>
         </div>
         <div className="stat-card-premium">
-          <div className="stat-icon" style={{ fontSize: '1.5rem', marginBottom: '12px' }}>🛒</div>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '4px' }}>{t('consumer.recent_credits')}</p>
-          <h3 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{recentCredits.length}</h3>
-          <span className="stat-trend warning" style={{ fontSize: '0.75rem', color: 'var(--warning)', fontWeight: '600' }}>↓ {t('common.needs_attention')}</span>
+          <div className="stat-icon" style={{ fontSize: '1.5rem', marginBottom: '12px' }}>📈</div>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '4px' }}>{t('consumer.repayment_rate')}</p>
+          <h3 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{stats.debt_progress_percentage}%</h3>
+          <span className="stat-trend success" style={{ fontSize: '0.75rem', color: 'var(--success)', fontWeight: '600' }}>↑ {t('common.improving')}</span>
         </div>
       </div>
 
-      <div className="content-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
-        <div className="left-column">
-          {/* 4. Recent Credits Table */}
-          <section className="fintech-card">
+      <div className="dashboard-main-content">
+        <div className="content-left">
+          <div className="section-card-fintech">
             <div className="section-header">
-              <h2>{t('consumer.recent_credits')}</h2>
-              <button className="view-details-btn">{t('common.view_all')}</button>
+              <h3>{t('consumer.recent_credits')}</h3>
+              <button className="text-button">{t('common.view_all')}</button>
             </div>
-            <div className="credits-table-wrapper" style={{ overflowX: 'auto' }}>
-              <table className="credits-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                    <th style={{ textAlign: 'start', padding: '12px 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t('common.product')}</th>
-                    <th style={{ textAlign: 'start', padding: '12px 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t('common.status')}</th>
-                    <th style={{ textAlign: 'start', padding: '12px 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t('common.amount')}</th>
-                    <th style={{ textAlign: 'start', padding: '12px 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t('common.date')}</th>
-                    <th style={{ textAlign: 'start', padding: '12px 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t('common.actions')}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {recentCredits.length > 0 ? (
-                    recentCredits.map((credit) => (
-                      <tr key={credit.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
-                        <td style={{ padding: '16px 0' }}>
-                          <div className="product-info" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                            <div className="product-icon" style={{ width: '32px', height: '32px', background: 'var(--bg-main)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📦</div>
-                            <div>
-                              <p className="product-name" style={{ margin: 0, fontWeight: '700', fontSize: '0.9rem' }}>{credit.product_name}</p>
-                              <p className="seller-name" style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)' }}>{credit.seller_name}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td style={{ padding: '16px 0' }}>
-                          <span className={`status-${credit.status}`}>
-                            {t(`common.${credit.status}`)}
-                          </span>
-                        </td>
-                        <td style={{ padding: '16px 0' }}>
-                          <p className="amount-main" style={{ margin: 0, fontWeight: '700', fontSize: '0.9rem' }}>{credit.total_amount.toLocaleString()} {t('common.dh')}</p>
-                          <p className="amount-sub" style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)' }}>{credit.remaining_amount.toLocaleString()} {t('common.dh')} {t('consumer.left')}</p>
-                        </td>
-                        <td style={{ padding: '16px 0', fontSize: '0.85rem' }}>{credit.due_date || t('consumer.none')}</td>
-                        <td style={{ padding: '16px 0' }}>
-                          <button className="btn-table-action">{t('common.view')}</button>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="5" style={{ textAlign: 'center', padding: '32px', color: 'var(--text-muted)' }}>{t('consumer.no_credits')}</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+            <div className="recent-activity-list">
+              {recentCredits.length > 0 ? (
+                recentCredits.map(credit => (
+                  <div key={credit.id} className="activity-item-fintech">
+                    <div className="activity-icon-box">💳</div>
+                    <div className="activity-details">
+                      <h4>{credit.product_name}</h4>
+                      <p>{credit.seller?.name || t('auth.seller')}</p>
+                    </div>
+                    <div className="activity-amount">
+                      <div className="amount-value">-{credit.remaining_amount} {t('common.dh')}</div>
+                      <div className={`status-pill ${credit.status}`}>{t(`common.status.${credit.status}`)}</div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="empty-state-mini">{t('consumer.no_credits')}</div>
+              )}
             </div>
-          </section>
+          </div>
         </div>
 
-        <div className="right-column">
-          {/* 5. Trust Score Analysis Card */}
-          <section className="fintech-card">
+        <div className="content-right">
+          <div className="section-card-fintech">
             <div className="section-header">
-              <h2>{t('consumer.trust_analysis')}</h2>
+              <h3>{t('consumer.trust_analysis')}</h3>
             </div>
             <TrustScore score={stats.trust_score} />
-            <div className="trust-factors" style={{ marginTop: '24px' }}>
-              <p style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-light)', marginBottom: '16px', textTransform: 'uppercase' }}>{t('consumer.key_factors')}</p>
-              <div className="factor-item" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                <div className="factor-status success" style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success)' }}></div>
-                <span style={{ fontSize: '0.85rem' }}>{t('common.on_time')}</span>
+            <div className="trust-tips">
+              <div className="tip-item">
+                <span className="tip-bullet">✓</span>
+                <p>{t('consumer.tip_on_time')}</p>
+              </div>
+              <div className="tip-item">
+                <span className="tip-bullet">✓</span>
+                <p>{t('consumer.tip_communication')}</p>
               </div>
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>

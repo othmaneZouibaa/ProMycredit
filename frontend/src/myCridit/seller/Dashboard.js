@@ -122,7 +122,7 @@ const Dashboard = () => {
                     <div className="activity-icon" style={{ background: 'var(--primary-soft)' }}>💳</div>
                     <div className="activity-details">
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between', width: '100%' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }} onClick={() => setSelectedCredit(credit)}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                           <h4>{t('seller.new_credit_issued')}</h4>
                           <span className={`badge-modern ${
                             credit.status === 'pending' ? 'warning' : 
