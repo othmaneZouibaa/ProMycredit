@@ -1,0 +1,44 @@
+{
+  "common": {
+    "welcome": "Bienvenue",
+    "dashboard": "Tableau de bord",
+    "my_credits": "Mes Crédits",
+    "pending_requests": "Demandes en attente",
+    "payments_history": "Historique des paiements",
+    "notifications": "Notifications",
+    "profile": "Mon Profil",
+    "settings": "Paramètres",
+    "sign_out": "Déconnexion",
+    "search": "Rechercher...",
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "actions": "Actions",
+    "status": "Statut",
+    "amount": "Montant",
+    "date": "Date"
+  },
+  "seller": {
+    "total_consumers": "Total Clients",
+    "total_issued": "Total Crédits Émis",
+    "total_collected": "Total Collecté",
+    "total_unpaid": "Total Non Payé",
+    "recent_activity": "Activité Récente",
+    "quick_actions": "Actions Rapides",
+    "add_consumer": "Ajouter un Client",
+    "create_credit": "Créer un Crédit",
+    "register_payment": "Enregistrer un Paiement",
+    "debt_aging": "Analyse de l'Ancienneté de la Dette",
+    "top_debtors": "Principaux Débiteurs"
+  },
+  "consumer": {
+    "debt_free": "Vous n'avez plus de dettes !",
+    "remaining_balance": "SOLDE TOTAL RESTANT",
+    "trust_score": "Score de Confiance",
+    "recent_credits": "Crédits Récents",
+    "trust_analysis": "Analyse du Score de Confiance"
+  }
+}

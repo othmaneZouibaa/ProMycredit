@@ -1,0 +1,44 @@
+{
+  "common": {
+    "welcome": "Welcome back",
+    "dashboard": "Dashboard",
+    "my_credits": "My Credits",
+    "pending_requests": "Pending Requests",
+    "payments_history": "Payments History",
+    "notifications": "Notifications",
+    "profile": "My Profile",
+    "settings": "Settings",
+    "sign_out": "Sign Out",
+    "search": "Search...",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "actions": "Actions",
+    "status": "Status",
+    "amount": "Amount",
+    "date": "Date"
+  },
+  "seller": {
+    "total_consumers": "Total Consumers",
+    "total_issued": "Total Credits Issued",
+    "total_collected": "Total Collected",
+    "total_unpaid": "Total Unpaid",
+    "recent_activity": "Recent Activity",
+    "quick_actions": "Quick Actions",
+    "add_consumer": "Add Consumer",
+    "create_credit": "Create Credit",
+    "register_payment": "Register Payment",
+    "debt_aging": "Debt Aging Analysis",
+    "top_debtors": "Top Debtors"
+  },
+  "consumer": {
+    "debt_free": "You are Debt-Free!",
+    "remaining_balance": "TOTAL REMAINING BALANCE",
+    "trust_score": "Trust Score",
+    "recent_credits": "Recent Credits",
+    "trust_analysis": "Trust Score Analysis"
+  }
+}

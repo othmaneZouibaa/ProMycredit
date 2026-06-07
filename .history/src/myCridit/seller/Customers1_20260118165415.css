@@ -1,0 +1,73 @@
+/* Topbar – fixed alignment */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #64748b;
+  cursor: pointer;
+}
+
+/* Stats – better colors & padding */
+.stat-card.total .value { color: var(--primary); font-weight: 700; }
+.stat-card.paid   .value { color: #16a34a; font-weight: 700; }
+.stat-card.unpaid .value { color: #dc2626; font-weight: 700; }
+
+.stat-card {
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+/* Form improvements */
+.form-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.6rem 2rem;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.45rem;
+  color: #334155;
+}
+
+.form-group input {
+  padding: 0.85rem 1.1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+/* Illustration side – make it nicer */
+.illustration-side {
+  background: #f0f7ff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+.illustration-side img {
+  max-height: 280px;
+  object-fit: contain;
+}

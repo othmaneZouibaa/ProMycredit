@@ -1,0 +1,44 @@
+{
+  "common": {
+    "welcome": "مرحباً بك",
+    "dashboard": "لوحة التحكم",
+    "my_credits": "ديوني",
+    "pending_requests": "طلبات معلقة",
+    "payments_history": "سجل الأداء",
+    "notifications": "الإشعارات",
+    "profile": "حسابي",
+    "settings": "الإعدادات",
+    "sign_out": "خروج",
+    "search": "بحث...",
+    "loading": "جاري التحميل...",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "actions": "إجراءات",
+    "status": "الحالة",
+    "amount": "المبلغ",
+    "date": "التاريخ"
+  },
+  "seller": {
+    "total_consumers": "مجموع الزبناء",
+    "total_issued": "مجموع الكريدي",
+    "total_collected": "المبالغ المستخلصة",
+    "total_unpaid": "الديون المتبقية",
+    "recent_activity": "آخر التحركات",
+    "quick_actions": "إجراءات سريات",
+    "add_consumer": "إضافة زبون",
+    "create_credit": "قيد كريدي",
+    "register_payment": "تسجيل أداء",
+    "debt_aging": "تحليل أقدمية الديون",
+    "top_debtors": "أكبر المدينين"
+  },
+  "consumer": {
+    "debt_free": "هنيئاً لك! ليس عليك أي ديون",
+    "remaining_balance": "مجموع الدين المتبقي",
+    "trust_score": "مؤشر الثقة",
+    "recent_credits": "آخر الكريديات",
+    "trust_analysis": "تحليل مؤشر الثقة"
+  }
+}

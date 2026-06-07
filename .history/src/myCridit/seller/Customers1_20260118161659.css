@@ -1,0 +1,30 @@
+.panel h2 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+form input {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #1e90ff;
+}
+
+form button {
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+form button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}

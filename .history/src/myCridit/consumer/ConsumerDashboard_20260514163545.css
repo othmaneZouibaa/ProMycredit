@@ -1,0 +1,87 @@
+/* Updated ConsumerDashboard.css - Advanced Fintech Focus */
+:root {
+  --primary: #0056b3;
+  --bg: #f8fafc;
+  --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+/* Global Debt Header */
+.global-debt-summary {
+  background: linear-gradient(135deg, var(--primary) 0%, #003d8a 100%);
+  color: white;
+  padding: 40px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-content h3 { font-size: 0.9rem; text-transform: uppercase; opacity: 0.8; margin-bottom: 10px; }
+.summary-amount { font-size: 2.5rem; font-weight: 800; }
+.summary-trust { background: rgba(255,255,255,0.15); padding: 15px 25px; border-radius: 12px; text-align: center; }
+
+/* Debt Progress Component */
+.debt-progress-container { margin: 15px 0; }
+.progress-labels { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; color: var(--text-muted); }
+.progress-track { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+
+/* Smart Alerts */
+.smart-alert { 
+  display: flex; 
+  gap: 15px; 
+  padding: 15px; 
+  border-radius: 10px; 
+  background: white; 
+  border: 1px solid #e2e8f0;
+  margin-bottom: 12px;
+  position: relative;
+}
+.smart-alert.unread { border-left: 4px solid var(--primary); }
+.alert-icon { font-size: 1.2rem; }
+.alert-message { font-size: 0.9rem; margin: 0; color: var(--text-dark); font-weight: 500; }
+.alert-date { font-size: 0.75rem; color: var(--text-muted); }
+.unread-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; position: absolute; right: 15px; top: 15px; }
+
+/* Activity Feed */
+.activity-item {
+  display: flex;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.activity-date { min-width: 80px; font-size: 0.8rem; color: var(--text-muted); }
+.activity-details h4 { font-size: 0.95rem; margin: 0; }
+.activity-details p { font-size: 0.85rem; color: var(--text-muted); margin: 2px 0 0; }
+
+/* Credits Grid */
+.credits-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+.credit-card-fintech {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: var(--card-shadow);
+}
+.credit-card-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+.credit-card-header h4 { margin: 0; color: var(--text-dark); }
+.seller-badge { font-size: 0.7rem; background: #f1f5f9; padding: 4px 8px; border-radius: 4px; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .global-debt-summary { flex-direction: column; text-align: center; gap: 20px; }
+  .summary-amount { font-size: 2rem; }
+}
+.badge-new { background: var(--danger); color: white; padding: 2px 8px; border-radius: 20px; font-size: 0.6rem; text-transform: uppercase; }
+.detail-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.85rem; }
+.credit-footer-fintech { margin-top: 15px; padding-top: 15px; border-top: 1px solid #f1f5f9; font-size: 0.75rem; color: var(--text-muted); }
