@@ -14,7 +14,7 @@ const Sidebar = () => {
   };
 
   const { user } = useSelector((state) => state.auth);
-  const { stats, notifications, pendingCredits } = useSelector((state) => state.consumer);
+  const { stats, notifications, pendingCredits, paymentRequests } = useSelector((state) => state.consumer);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -47,6 +47,15 @@ const Sidebar = () => {
         <Link to="/consumer-panel/credits" className={`nav-link ${isActive('/consumer-panel/credits') ? 'active' : ''}`}>
           <span className="nav-icon">💳</span>
           <span>{t('common.my_credits')}</span>
+        </Link>
+        <Link to="/consumer-panel/payment-requests" className={`nav-link ${isActive('/consumer-panel/payment-requests') ? 'active' : ''}`}>
+          <span className="nav-icon">💰</span>
+          <span>{t('consumer.pending_payment_requests')}</span>
+          {paymentRequests && paymentRequests.filter(r => r.status === 'pending').length > 0 && (
+            <span className="badge-count" style={{ background: 'var(--primary)', color: 'white' }}>
+              {paymentRequests.filter(r => r.status === 'pending').length}
+            </span>
+          )}
         </Link>
         <Link to="/consumer-panel/pending-requests" className={`nav-link ${isActive('/consumer-panel/pending-requests') ? 'active' : ''}`}>
           <span className="nav-icon">📝</span>

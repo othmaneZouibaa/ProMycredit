@@ -42,6 +42,42 @@ export const deleteCredit = createAsyncThunk(
     }
 );
 
+export const fetchSellerPaymentRequests = createAsyncThunk(
+    "dashboard/fetchPaymentRequests",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await api.get("/seller/payment-requests");
+            return response.data.requests;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "Failed to fetch payment requests");
+        }
+    }
+);
+
+export const approvePaymentRequest = createAsyncThunk(
+    "dashboard/approvePaymentRequest",
+    async (id, { rejectWithValue }) => {
+        try {
+            await api.post(`/seller/payment-requests/${id}/approve`);
+            return id;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "Failed to approve payment request");
+        }
+    }
+);
+
+export const rejectPaymentRequest = createAsyncThunk(
+    "dashboard/rejectPaymentRequest",
+    async (id, { rejectWithValue }) => {
+        try {
+            await api.post(`/seller/payment-requests/${id}/reject`);
+            return id;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "Failed to reject payment request");
+        }
+    }
+);
+
 const dashboardSlice = createSlice({
     name: 'dashboard',
     initialState: {
@@ -62,6 +98,7 @@ const dashboardSlice = createSlice({
         recentPayments: [],
         pendingCredits: [],
         topDebtors: [],
+        paymentRequests: [],
         status: 'idle',
         error: null,
     },
@@ -96,6 +133,15 @@ const dashboardSlice = createSlice({
                         consumer_name: state.recentCredits[index].consumer_name
                     };
                 }
+            })
+            .addCase(fetchSellerPaymentRequests.fulfilled, (state, action) => {
+                state.paymentRequests = action.payload;
+            })
+            .addCase(approvePaymentRequest.fulfilled, (state, action) => {
+                state.paymentRequests = state.paymentRequests.filter(r => r.id !== action.payload);
+            })
+            .addCase(rejectPaymentRequest.fulfilled, (state, action) => {
+                state.paymentRequests = state.paymentRequests.filter(r => r.id !== action.payload);
             });
     }
 });

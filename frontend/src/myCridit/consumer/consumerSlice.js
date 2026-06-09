@@ -97,6 +97,30 @@ export const markNotificationRead = createAsyncThunk(
     }
 );
 
+export const fetchPaymentRequests = createAsyncThunk(
+    "consumer/fetchPaymentRequests",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await api.get("/consumer/payment-requests");
+            return response.data.requests;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "Failed to fetch payment requests");
+        }
+    }
+);
+
+export const submitPaymentRequest = createAsyncThunk(
+    "consumer/submitPaymentRequest",
+    async (data, { rejectWithValue }) => {
+        try {
+            const response = await api.post("/consumer/payment-requests", data);
+            return response.data.request;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || "Failed to submit payment request");
+        }
+    }
+);
+
 const consumerSlice = createSlice({
     name: 'consumer',
     initialState: {
@@ -112,10 +136,15 @@ const consumerSlice = createSlice({
         payments: [],
         notifications: [],
         recentCredits: [],
+        paymentRequests: [],
         status: 'idle',
         error: null,
     },
-    reducers: {},
+    reducers: {
+        clearError: (state) => {
+            state.error = null;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchConsumerStats.pending, (state) => {
@@ -151,6 +180,12 @@ const consumerSlice = createSlice({
             .addCase(markNotificationRead.fulfilled, (state, action) => {
                 const note = state.notifications.find(n => n.id === action.payload);
                 if (note) note.is_read = true;
+            })
+            .addCase(fetchPaymentRequests.fulfilled, (state, action) => {
+                state.paymentRequests = action.payload;
+            })
+            .addCase(submitPaymentRequest.fulfilled, (state, action) => {
+                state.paymentRequests.unshift(action.payload);
             });
     }
 });

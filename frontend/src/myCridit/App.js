@@ -22,6 +22,7 @@ import PaymentHistory from "./consumer/pages/Payments"
 import ConsumerProfile from "./consumer/pages/Profile"
 import ConsumerSettings from "./consumer/pages/Settings"
 import ConsumerNotifications from "./consumer/pages/Notifications"
+import PaymentRequests from "./consumer/pages/PaymentRequests"
 
 const App=()=>{
     const dispatch = useDispatch();
@@ -66,6 +67,7 @@ const App=()=>{
                   <Route index element={<ConsumerDashboard />} />
                   <Route path="credits" element={<MyCredits />} />
                   <Route path="pending-requests" element={<PendingCredits />} />
+                  <Route path="payment-requests" element={<PaymentRequests />} />
                   <Route path="payments" element={<PaymentHistory />} />
                   <Route path="notifications" element={<ConsumerNotifications />} />
                   <Route path="profile" element={<ConsumerProfile />} />

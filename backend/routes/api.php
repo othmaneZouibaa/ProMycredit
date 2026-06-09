@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\v1\ConsumerCreditController;
 use App\Http\Controllers\Api\v1\ConsumerPaymentController;
 use App\Http\Controllers\Api\v1\ConsumerDashboardController;
 use App\Http\Controllers\Api\v1\NotificationController;
+use App\Http\Controllers\Api\v1\SellerPaymentRequestController;
+use App\Http\Controllers\Api\v1\ConsumerPaymentRequestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +60,9 @@ Route::prefix('v1')->group(function () {
             
             // Payments
             Route::post('/payments', [SellerPaymentController::class, 'store']);
+            Route::get('/payment-requests', [SellerPaymentRequestController::class, 'index']);
+            Route::post('/payment-requests/{id}/approve', [SellerPaymentRequestController::class, 'approve']);
+            Route::post('/payment-requests/{id}/reject', [SellerPaymentRequestController::class, 'reject']);
             
             // Stats
             Route::get('/dashboard-stats', [SellerDashboardController::class, 'stats']);
@@ -77,6 +82,8 @@ Route::prefix('v1')->group(function () {
             
             // My History
             Route::get('/payments', [ConsumerPaymentController::class, 'index']);
+            Route::get('/payment-requests', [ConsumerPaymentRequestController::class, 'index']);
+            Route::post('/payment-requests', [ConsumerPaymentRequestController::class, 'store']);
             
             // Dashboard
             Route::get('/dashboard-stats', [ConsumerDashboardController::class, 'stats']);

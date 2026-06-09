@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './Dashboard.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchDashboardStats, deleteCredit, updateCredit } from './dashboardSlice'
+import { fetchDashboardStats, deleteCredit, updateCredit, fetchSellerPaymentRequests, approvePaymentRequest, rejectPaymentRequest } from './dashboardSlice'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 const Dashboard = () => {
   const { t } = useTranslation();
-  const { stats, recentCredits, recentPayments, pendingCredits, topDebtors, status, error } = useSelector((state) => state.dashboard);
+  const { stats, recentCredits, recentPayments, pendingCredits, topDebtors, paymentRequests, status, error } = useSelector((state) => state.dashboard);
   const { user: currentSeller } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -16,12 +16,28 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchDashboardStats());
+    dispatch(fetchSellerPaymentRequests());
   }, [dispatch]);
 
   const handleDelete = async (id) => {
     if (window.confirm(t('seller.delete_confirm'))) {
       await dispatch(deleteCredit(id));
       dispatch(fetchDashboardStats()); // Refresh stats after deletion
+    }
+  };
+
+  const handleApprovePayment = async (id) => {
+    if (window.confirm(t('seller.approve_confirm'))) {
+      await dispatch(approvePaymentRequest(id)).unwrap();
+      dispatch(fetchDashboardStats()); // Refresh stats
+      dispatch(fetchSellerPaymentRequests()); // Refresh requests
+    }
+  };
+
+  const handleRejectPayment = async (id) => {
+    if (window.confirm(t('seller.reject_confirm'))) {
+      await dispatch(rejectPaymentRequest(id)).unwrap();
+      dispatch(fetchSellerPaymentRequests());
     }
   };
 
@@ -156,6 +172,46 @@ const Dashboard = () => {
                 ))
               ) : (
                 !isLoading && <p className="empty-state">{t('seller.no_activity')}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Payment Requests Section */}
+          <div className="section-card" style={{ marginTop: '32px' }}>
+            <div className="section-header-modern">
+              <h2>{t('consumer.pending_payment_requests')}</h2>
+              <span className="badge-modern warning">{paymentRequests.filter(r => r.status === 'pending').length}</span>
+            </div>
+            <div className="activity-list">
+              {paymentRequests && paymentRequests.filter(r => r.status === 'pending').length > 0 ? (
+                paymentRequests.filter(r => r.status === 'pending').map(request => (
+                  <div key={`req-${request.id}`} className="activity-item">
+                    <div className="activity-icon" style={{ background: 'var(--warning-soft)' }}>⌛</div>
+                    <div className="activity-details">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between', width: '100%' }}>
+                        <h4>{t('seller.payment_request_from', { name: request.consumer?.name })}</h4>
+                        <div className="request-actions" style={{ display: 'flex', gap: '8px' }}>
+                          <button 
+                            onClick={() => handleApprovePayment(request.id)}
+                            style={{ background: 'var(--success)', color: 'white', border: 'none', padding: '4px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: '700' }}
+                          >
+                            {t('seller.approve_payment')}
+                          </button>
+                          <button 
+                            onClick={() => handleRejectPayment(request.id)}
+                            style={{ background: 'var(--danger)', color: 'white', border: 'none', padding: '4px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: '700' }}
+                          >
+                            {t('seller.reject_payment')}
+                          </button>
+                        </div>
+                      </div>
+                      <p>{request.credit?.product_name} • {parseFloat(request.amount).toLocaleString()} {t('common.dh')}</p>
+                      {request.note && <p style={{ fontStyle: 'italic', fontSize: '0.8rem', marginTop: '4px' }}>"{request.note}"</p>}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="empty-state">{t('consumer.no_payment_requests')}</p>
               )}
             </div>
           </div>

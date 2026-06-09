@@ -2,9 +2,9 @@ import React from 'react';
 import DebtProgressBar from './DebtProgressBar';
 import StatusBadge from './StatusBadge';
 
-const FintechCreditCard = ({ credit }) => {
+const FintechCreditCard = ({ credit, onClick }) => {
   return (
-    <div className="credit-card-saas">
+    <div className="credit-card-saas" onClick={onClick} style={{ cursor: 'pointer' }}>
       <div className="card-top">
         <div>
           <h3>{credit.product}</h3>
