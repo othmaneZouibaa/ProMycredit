@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Consumer;
 use App\Models\User;
+use App\Models\Payment;
+use App\Models\Credit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -22,23 +24,24 @@ class SellerConsumerController extends Controller
         // Optional Search filter (name, phone, or cin)
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
-            $query->where(function ($q) use ($search) {
+            $query->where(function($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('phone', 'like', "%{$search}%")
                   ->orWhere('cin', 'like', "%{$search}%");
             });
         }
 
-        // Fetch consumers with their credits stats (only accepted/unpaid/partial/paid)
+        // Fetch consumers with their credits (all, not just accepted)
         $consumers = $query->with(['credits' => function($q) {
-            $q->whereNotIn('status', ['pending', 'rejected']);
+            $q->orderBy('created_at', 'desc');
         }])->get()->map(function ($consumer) {
             $credits = $consumer->credits;
             
             $totalCreditsCount = $credits->count();
-            $unpaidCreditsCount = $credits->whereNotIn('status', ['paid'])->count();
-            $totalDebt = $credits->sum('remaining_amount');
-            $totalPaid = $credits->sum('paid_amount');
+            $activeCredits = $credits->whereNotIn('status', ['rejected']);
+            $totalDebt = $activeCredits->sum('remaining_amount');
+            $totalPaid = $activeCredits->sum('paid_amount');
+            $unpaidCreditsCount = $activeCredits->whereNotIn('status', ['paid'])->count();
 
             return [
                 'id' => $consumer->id,
@@ -54,7 +57,8 @@ class SellerConsumerController extends Controller
                     'unpaid_credits_count' => $unpaidCreditsCount,
                     'total_debt' => floatval($totalDebt),
                     'total_paid' => floatval($totalPaid),
-                ]
+                ],
+                'credits' => $credits // Send all credits for display if needed
             ];
         });
 
@@ -139,8 +143,15 @@ class SellerConsumerController extends Controller
             }])
             ->firstOrFail();
 
+        // Get all payments through the consumer's credits, since Payment has credit_id
+        $payments = Payment::whereHas('credit', function($q) use ($id) {
+            $q->where('consumer_id', $id);
+        })->orderBy('created_at', 'desc')->get();
+
         return response()->json([
-            'consumer' => $consumer
+            'consumer' => $consumer,
+            'credits' => $consumer->credits,
+            'payments' => $payments
         ]);
     }
 
@@ -183,14 +194,6 @@ class SellerConsumerController extends Controller
         $consumer = Consumer::where('id', $id)
             ->where('seller_id', $sellerId)
             ->firstOrFail();
-
-        // Prevent deleting if there are unpaid credits
-        $unpaidCredits = $consumer->credits()->where('status', '!=', 'paid')->count();
-        if ($unpaidCredits > 0) {
-            return response()->json([
-                'message' => 'Cannot delete consumer with unpaid credits. Settle all credits first.'
-            ], 422);
-        }
 
         $consumer->delete();
 

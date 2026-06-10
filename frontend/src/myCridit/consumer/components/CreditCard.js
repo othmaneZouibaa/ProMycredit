@@ -1,33 +1,54 @@
 import React from 'react';
-import DebtProgressBar from './DebtProgressBar';
-import StatusBadge from './StatusBadge';
+import { useTranslation } from 'react-i18next';
 
 const FintechCreditCard = ({ credit, onClick }) => {
+  const { t } = useTranslation();
+  
+  const repaidPercentage = Math.round((credit.paid_amount / credit.total_amount) * 100);
+  
   return (
-    <div className="credit-card-saas" onClick={onClick} style={{ cursor: 'pointer' }}>
+    <div className="credit-card-saas" onClick={onClick}>
       <div className="card-top">
         <div>
-          <h3>{credit.product}</h3>
-          <span className="seller-tag">{credit.sellerName}</span>
+          <h3>{credit.product_name}</h3>
+          <span className="seller-tag">
+            <i className="fas fa-store"></i> {t('consumer.credits.seller')}: {credit.seller_name || 'N/A'}
+          </span>
         </div>
-        <StatusBadge status={credit.status} />
+        <span className={`status-badge status-${credit.status}`}>
+          {t(`common.status.${credit.status}`)}
+        </span>
       </div>
 
       <div className="card-details">
         <div className="detail-item">
-          <span>Purchased On</span>
-          <strong>{credit.date}</strong>
+          <span>{t('consumer.credits.total_value')}</span>
+          <strong>{credit.total_amount.toLocaleString()} DH</strong>
         </div>
         <div className="detail-item">
-          <span>Total Value</span>
-          <strong>{credit.totalAmount.toLocaleString()} DH</strong>
+          <span>{t('consumer.credits.purchased_on')}</span>
+          <strong>{new Date(credit.created_at).toLocaleDateString()}</strong>
         </div>
       </div>
 
-      <DebtProgressBar paid={credit.paidAmount} total={credit.totalAmount} />
+      <div className="progress-section">
+        <div className="progress-labels">
+          <span>{repaidPercentage}% {t('consumer.credits.repaid')}</span>
+          <span className="remaining-text">
+            {credit.remaining_amount.toLocaleString()} DH {t('consumer.credits.remaining')}
+          </span>
+        </div>
+        <div className="progress-bar-container">
+          <div 
+            className="progress-bar-fill" 
+            style={{ width: `${repaidPercentage}%` }}
+          ></div>
+        </div>
+      </div>
 
       <div className="credit-footer-fintech">
-        <span>Last Payment: {credit.lastPaymentDate || 'No payments yet'}</span>
+        <span>{t('consumer.credits.last_payment')}</span>
+        <span>{credit.last_payment_date ? new Date(credit.last_payment_date).toLocaleDateString() : t('common.none')}</span>
       </div>
     </div>
   );

@@ -49,6 +49,7 @@ class SellerDashboardController extends Controller
                     'consumer_name' => $credit->consumer ? $credit->consumer->name : 'Unknown',
                     'product_name' => $credit->product_name,
                     'total_amount' => floatval($credit->total_amount),
+                    'paid_amount' => floatval($credit->paid_amount),
                     'remaining_amount' => floatval($credit->remaining_amount),
                     'status' => $credit->status,
                     'created_at' => $credit->created_at,

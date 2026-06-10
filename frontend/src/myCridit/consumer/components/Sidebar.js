@@ -75,12 +75,13 @@ const Sidebar = () => {
             <span className="badge-count">{notifications.filter(n => !n.is_read).length}</span>
           )}
         </Link>
-        <div style={{ margin: '24px 16px 8px', fontSize: '0.7rem', fontWeight: '700', color: 'var(--text-light)', textTransform: 'uppercase', letterSpacing: '1px' }}>
+
+        <div className="nav-section-title" style={{ padding: '24px 16px 8px', fontSize: '0.65rem', fontWeight: '800', color: 'var(--text-light)', textTransform: 'uppercase', letterSpacing: '1px' }}>
           {t('common.account')}
         </div>
         <Link to="/consumer-panel/profile" className={`nav-link ${isActive('/consumer-panel/profile') ? 'active' : ''}`}>
           <span className="nav-icon">👤</span>
-          <span>{t('common.profile')}</span>
+          <span>{t('common.my_profile')}</span>
         </Link>
         <Link to="/consumer-panel/settings" className={`nav-link ${isActive('/consumer-panel/settings') ? 'active' : ''}`}>
           <span className="nav-icon">⚙️</span>

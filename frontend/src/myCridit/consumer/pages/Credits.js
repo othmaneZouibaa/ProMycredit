@@ -18,11 +18,16 @@ const Credits = () => {
   const isLoading = status === 'loading';
 
   return (
-    <div className="credits-page-modern">
+    <div className="panel-main-content">
+      <div className="content-header-saas">
+        <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">My Credits</h2>
+        <p className="text-slate-500 font-medium">View and manage your ongoing debt installments</p>
+      </div>
+
       {isLoading && credits.length === 0 ? (
         <div className="text-center p-5">{t('common.loading')}</div>
       ) : credits.length > 0 ? (
-        <div className="credits-grid">
+        <div className="credits-grid-modern">
           {credits.map((credit) => (
             <FintechCreditCard 
               key={credit.id} 

@@ -464,42 +464,175 @@ body {
   border: 1px solid rgba(16, 185, 129, 0.1);
 }
 
-/* Credit Progress Cards */
-.credit-item-card {
-  padding: 20px;
-  border-radius: var(--radius-lg);
-  background: var(--bg-main);
-  border: 1px solid var(--border-light);
-  margin-bottom: 16px;
+/* Page Header SaaS Style */
+.content-header-saas {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+[dir="rtl"] .content-header-saas {
+  text-align: right;
+}
+
+.content-header-saas h2 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.content-header-saas p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Credits Grid Modern */
+.credits-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* Credit Card Premium Fintech */
+.credit-card-saas {
+  background: white;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  padding: 24px;
   transition: var(--transition);
+  position: relative;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 
-.credit-item-card:hover { 
-  border-color: var(--primary); 
-  background: var(--white);
-  box-shadow: var(--shadow-md);
+.credit-card-saas:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
 }
 
-.credit-header {
+.card-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
-.credit-info h4 {
-  font-size: 1rem;
-  font-weight: 700;
+.card-top h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--text-main);
   margin-bottom: 4px;
+  text-transform: capitalize;
 }
 
 .seller-tag {
   font-size: 0.75rem;
+  font-weight: 600;
   color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Status Badges */
+.status-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+}
+
+.status-active, .status-accepted { background: var(--success-soft); color: var(--success); }
+.status-pending { background: var(--warning-soft); color: var(--warning); }
+.status-rejected { background: var(--danger-soft); color: var(--danger); }
+
+/* Card Details Section */
+.card-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.detail-item {
+  background: var(--bg-main);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.detail-item span {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.detail-item strong {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: block;
+}
+
+/* Progress Section */
+.progress-section {
+  margin-bottom: 24px;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.progress-labels span:first-child {
+  color: var(--primary);
+}
+
+.remaining-text {
+  color: var(--danger);
+}
+
+.progress-bar-container {
+  height: 8px;
   background: var(--border-light);
-  padding: 2px 8px;
-  border-radius: 4px;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, #3b82f6 100%);
+  border-radius: 100px;
+  transition: width 1s ease-out;
+}
+
+/* Card Footer */
+.credit-footer-fintech {
+  border-top: 1px dashed var(--border);
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.credit-footer-fintech span:last-child {
+  color: var(--text-main);
+  font-weight: 700;
 }
 
 .view-details-btn {

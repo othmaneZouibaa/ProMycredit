@@ -161,13 +161,6 @@ class SellerCreditController extends Controller
             ->where('seller_id', $sellerId)
             ->firstOrFail();
 
-        // Optional: Prevent deleting if there are payments attached
-        if ($credit->payments()->count() > 0) {
-            return response()->json([
-                'message' => 'Cannot delete credit with existing payments. Delete payments first.'
-            ], 422);
-        }
-
         $credit->delete();
 
         return response()->json([

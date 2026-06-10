@@ -21,8 +21,13 @@ const Dashboard = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm(t('seller.delete_confirm'))) {
-      await dispatch(deleteCredit(id));
-      dispatch(fetchDashboardStats()); // Refresh stats after deletion
+      try {
+        await dispatch(deleteCredit(id)).unwrap();
+        dispatch(fetchDashboardStats()); // Refresh stats after deletion
+        alert(t('common.success') || 'Deleted successfully');
+      } catch (err) {
+        alert(err || t('common.error'));
+      }
     }
   };
 
@@ -51,9 +56,14 @@ const Dashboard = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    await dispatch(updateCredit({ id: editingCredit.id, data: editForm }));
-    setEditingCredit(null);
-    dispatch(fetchDashboardStats()); // Refresh stats after update
+    try {
+      await dispatch(updateCredit({ id: editingCredit.id, data: editForm })).unwrap();
+      setEditingCredit(null);
+      dispatch(fetchDashboardStats()); // Refresh stats after update
+      alert(t('common.success'));
+    } catch (err) {
+      alert(err || t('common.error'));
+    }
   };
 
   const isLoading = status === 'loading';
@@ -141,11 +151,12 @@ const Dashboard = () => {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                           <h4>{t('seller.new_credit_issued')}</h4>
                           <span className={`badge-modern ${
+                            credit.status === 'paid' ? 'success' : 
+                            credit.status === 'partial' ? 'primary' : 
                             credit.status === 'pending' ? 'warning' : 
-                            credit.status === 'accepted' ? 'success' : 
-                            credit.status === 'rejected' ? 'danger' : 'primary'
+                            credit.status === 'rejected' ? 'danger' : 'warning'
                           }`} style={{ fontSize: '0.6rem', padding: '2px 6px' }}>
-                            {t(`common.${credit.status}`)}
+                            {t(`common.status.${credit.status}`)}
                           </span>
                         </div>
                         <div className="credit-actions" style={{ display: 'flex', gap: '8px' }}>
@@ -166,6 +177,10 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <p>{credit.consumer_name} • {credit.product_name}</p>
+                      <div className="credit-summary-mini" style={{ display: 'flex', gap: '12px', marginTop: '4px', fontSize: '0.75rem' }}>
+                        <span style={{ color: 'var(--success)' }}>{t('common.paid')}: {credit.paid_amount?.toLocaleString()} {t('common.dh')}</span>
+                        <span style={{ color: credit.remaining_amount > 0 ? 'var(--danger)' : 'var(--success)' }}>{t('seller.remaining')}: {credit.remaining_amount?.toLocaleString()} {t('common.dh')}</span>
+                      </div>
                     </div>
                     <div className="activity-amount minus">-{credit.total_amount.toLocaleString()} {t('common.dh')}</div>
                   </div>
@@ -306,10 +321,6 @@ const Dashboard = () => {
                 <span>💳</span>
                 {t('seller.create_credit')}
               </Link>
-              <Link to="/seller-panel/list-consumers" className="action-btn">
-                <span>💰</span>
-                {t('seller.register_payment')}
-              </Link>
               <Link to="/seller-panel/dashboard" className="action-btn">
                 <span>📊</span>
                 {t('seller.reports')}
@@ -328,33 +339,37 @@ const Dashboard = () => {
       </div>
       {/* Edit Credit Modal */}
       {editingCredit && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000 }}>
-          <div className="modal-content" style={{ background: 'white', padding: '32px', borderRadius: '16px', width: '100%', maxWidth: '400px' }}>
-            <h2 style={{ marginBottom: '24px' }}>Edit Credit</h2>
+        <div className="modal-overlay-modern">
+          <div className="modal-content-modern">
+            <h3>{t('common.edit')} {t('my_credits')}</h3>
             <form onSubmit={handleUpdate}>
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Product Name</label>
+              <div className="form-group-modern">
+                <label>{t('common.product')}</label>
                 <input 
                   type="text" 
                   value={editForm.product_name}
                   onChange={(e) => setEditForm({...editForm, product_name: e.target.value})}
-                  style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)' }}
                   required
                 />
               </div>
-              <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Total Amount (DH)</label>
+              <div className="form-group-modern">
+                <label>{t('common.amount')} ({t('common.dh')})</label>
                 <input 
                   type="number" 
                   value={editForm.total_amount}
                   onChange={(e) => setEditForm({...editForm, total_amount: e.target.value})}
-                  style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)' }}
                   required
+                  min="0.01"
+                  step="0.01"
                 />
               </div>
-              <div style={{ display: 'flex', gap: '12px' }}>
-                <button type="submit" style={{ flex: 1, padding: '12px', borderRadius: '8px', background: 'var(--primary)', color: 'white', border: 'none', fontWeight: '700', cursor: 'pointer' }}>Save Changes</button>
-                <button type="button" onClick={() => setEditingCredit(null)} style={{ flex: 1, padding: '12px', borderRadius: '8px', background: 'var(--bg-main)', border: '1px solid var(--border)', fontWeight: '700', cursor: 'pointer' }}>Cancel</button>
+              <div style={{ display: 'flex', gap: '12px', marginTop: '32px' }}>
+                <button type="submit" className="btn-modern primary" style={{ flex: 1 }}>
+                  {t('common.save')}
+                </button>
+                <button type="button" className="btn-modern" style={{ background: '#F1F5F9' }} onClick={() => setEditingCredit(null)}>
+                  {t('common.cancel')}
+                </button>
               </div>
             </form>
           </div>

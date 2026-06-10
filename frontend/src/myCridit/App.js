@@ -8,6 +8,7 @@ import Seller from "./seller/Seller"
 import Dashboard from "./seller/Dashboard"
 import Customers from "./seller/Customers"
 import ListConsumers from "./seller/listConsumers"
+import ConsumerDetail from "./seller/ConsumerDetail"
 import Login from "./auth/Login"
 import Signup from "./auth/Signup"
 import ProtectedRoute from "./auth/ProtectedRoute"
@@ -58,6 +59,7 @@ const App=()=>{
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="customers" element={<Customers />} />
                   <Route path="list-consumers" element={<ListConsumers />} />
+                  <Route path="consumer/:id" element={<ConsumerDetail />} />
                 </Route>
               </Route>
 
